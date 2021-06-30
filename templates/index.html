@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  <title>Dashboard</title>
+  <style>
+    .card {
+      color: #fff;
+      background-color: transparent;
+      border: 1px solid rgb(255, 255, 255);
+    }
+    .card-header {
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+}
+    .containerx {
+      width: 80vw;
+      min-height: 90vh;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      margin: 0 auto;
+    }
+    .wrapperx {
+      margin: 100px 0;
+      width: 90%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 300px);
+      grid-gap: 5rem;
+      justify-items: center;
+    }
+  </style>
+{% endblock title %}
+
+{% block body %}
+  <div class="containerx">
+    <div class="wrapperx">
+      <div class="card">
+        <div class="card-header">
+          Tasks
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your tasks.</h5>
+          <p class="card-text">You can add, update and remove your tasks here.</p>
+          <a href="/tasks" class="btn btn-outline-light">Open Tasks</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Workspaces
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your Workspaces.</h5>
+          <p class="card-text">You can open your code-workspaces from here.</p>
+          <a href="/Workspaces" class="btn btn-outline-light">Open Workspaces</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Projects
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your Projects.</h5>
+          <p class="card-text">You can open your python and web projects from here.</p>
+          <a href="/Projects" class="btn btn-outline-light">Open Projects</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Github
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your Github.</h5>
+          <p class="card-text">You can open your github repos from here.</p>
+          <a href="https://github.com/" class="btn btn-outline-light" target="_blank">Open Github</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Textbooks
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your Textbooks.</h5>
+          <p class="card-text">You can open your textbooks from here.</p>
+          <a href="/Textbooks" class="btn btn-outline-light">Open Textbooks</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Cloud
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Your Cloud.</h5>
+          <p class="card-text">You can open your terabox cloud storage from here.</p>
+          <a href="https://www.terabox.com/disk/home#/all?path=%2F&vmode=grid" class="btn btn-outline-light" target="_blank">Open Terabox</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock body %}
