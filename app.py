@@ -1,3 +1,4 @@
+from sys import path
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, redirect
@@ -20,6 +21,7 @@ class Todo(db.Model):
 
 class Workspace(db.Model):
   sno = db.Column(db.Integer, primary_key=True)
+  title = db.Column(db.String(500), nullable=False)
   path = db.Column(db.String(500), nullable=False)
 
 # ==========Your Dashboard==========
@@ -31,13 +33,26 @@ def dashboard():
 @app.route('/Workspaces/', methods=['GET', 'POST'])
 def workspaces():
   if request.method == 'POST':
-    file = request.form['filePath']
-    print(file)
-    workspace = Workspace(path=file)
+    fielTitle = request.form['fileTitle']
+    filePath = request.form['filePath']
+    workspace = Workspace(title=fielTitle, path=filePath)
     db.session.add(workspace)
     db.session.commit()
   allWorkspaces = Workspace.query.all()
   return render_template('workspaces.html', list=allWorkspaces)
+
+@app.route('/Workspaces/delete/<int:sno>')
+def deleteWorkspace(sno):
+  workspace = Workspace.query.filter_by(sno=sno).first()
+  db.session.delete(workspace)
+  db.session.commit()
+  return redirect("/Workspaces")
+
+@app.route('/Workspaces/open/<int:sno>')
+def openWorkspace(sno):
+  workspace = Workspace.query.filter_by(sno=sno).first()
+  startfile(workspace.path)
+  return redirect("/Workspaces")
 
 # ==========Your Projects==========
 @app.route('/Projects')
@@ -56,18 +71,12 @@ def tasks():
   allTodos = Todo.query.all()
   return render_template('tasks.html', allTodos=allTodos)
 
-@app.route('/tasks/show')
-def show():
-  allTodos = Todo.query.all()
-  print(allTodos)
-  return "This is show page"
-
 @app.route('/tasks/update/<int:sno>')
-def update():
+def updateTask():
   return "update page"
 
 @app.route('/tasks/delete/<int:sno>')
-def delete(sno):
+def deleteTask(sno):
   todo = Todo.query.filter_by(sno=sno).first()
   db.session.delete(todo)
   db.session.commit()

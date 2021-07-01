@@ -7,13 +7,13 @@
 {% block body %}
 <div class="container">
   <form action="http://127.0.0.1:5000/Workspaces/" method="POST">
-    <div class="form-floating mb-3">
-      <input type="email" class="form-control" id="floatingInput">
+    <div class="form-floating my-3">
+      <input type="text" class="form-control" name="fileTitle" id="floatingInput">
       <label for="floatingInput">Title</label>
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingInput">
-      <label for="floatingPassword">Address</label>
+    <div class="form-floating mt-3">
+      <input type="text" class="form-control" name="filePath" id="floatingInput">
+      <label for="floatingPassword">Path</label>
     </div>
     <button type="submit" class="btn btn-outline-light my-3">Add</button>
     <div class="alert alert-dark" role="alert">
@@ -26,22 +26,22 @@
         <th scope="col">#</th>
         <th scope="col">Title</th>
         <th scope="col">Description</th>
-        <th scope="col">Date</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
+      {% for item in list %}  
       <tr>
-        <th scope="row">1</td>
-        <td scope="row"></td>
-        <td scope="row">Description</td>
-        <td scope="row">Date</td>
+        <th scope="row">{{loop.index}}</td>
+          <td scope="row">{{item.title}}</td>
+          <td scope="row">{{item.path}}</td>
         <td scope="row">
-          <a href="/tasks/delete/" type="button" class="mx-1  btn btn-outline-light">Open</button>
-          <a href="/tasks/delete/" type="button" class="mx-1  btn btn-outline-light">Delete</button>
+          <a href="/Workspaces/open/{{item.sno}}" type="button" class="mx-1  btn btn-outline-light">Open</button>
+          <a href="/Workspaces/delete/{{item.sno}}" type="button" class="mx-1  btn btn-outline-light">Delete</button>
           <a href="/tasks/update/" type="button" class="mx-1  btn btn-outline-light">Update</button>
         </td>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
